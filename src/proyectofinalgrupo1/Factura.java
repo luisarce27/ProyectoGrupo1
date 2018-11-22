@@ -11,7 +11,7 @@ package proyectofinalgrupo1;
  */
 public class Factura {
     
-    String Local;
+    String Local,Notas;
     Cliente nombre;
     
     
