@@ -19,22 +19,22 @@ public class ListaProducto {
             ultimo = cabeza;
 
         } else {
-            if (p.getCantidad() <= cabeza.getDato().getEpisodios()) {//agregar a la izquierda
-                cabeza.setBack(new Nodo(s));
+            if (p.getCantidad() <= cabeza.getDato().getCantidad()) {//agregar a la izquierda
+                cabeza.setBack(new NodoProducto(p));
                 cabeza.getBack().setNext(cabeza);
                 cabeza = cabeza.getBack();
 
             }else{
-                if(s.getEpisodios()>= ultimo.getDato().getEpisodios()){//preguntamos si es mayor en episodios
-                    ultimo.setNext(new Nodo(s));
+                if(p.getCantidad()>= ultimo.getDato().getCantidad()){//preguntamos si es mayor en episodios
+                    ultimo.setNext(new NodoProducto(p));
                     ultimo.getNext().setBack(ultimo);
                     ultimo=ultimo.getNext();
                 }else{
-                    Nodo aux=cabeza;
-                    while(s.getEpisodios()> aux.getNext().getDato().getEpisodios()){
+                    NodoProducto aux=cabeza;
+                    while(p.getCantidad()> aux.getNext().getDato().getCantidad()){
                         aux=aux.getNext();
                     }
-                    Nodo temp = new Nodo(s);//creamos un nodo temporal
+                    NodoProducto temp = new NodoProducto(p);//creamos un nodo temporal
                     temp.setNext(aux.getNext());//temp tiene como siguiente a el nodo siguinte del aux
                     temp.setBack(aux);//seteo que temp tiene como back a aux
                     aux.setNext(temp);
@@ -49,7 +49,7 @@ public class ListaProducto {
    public String print (){
        if  (cabeza != null){
       String msj = cabeza.getDato()+"";
-      Nodo aux = cabeza.getNext();
+      NodoProducto aux = cabeza.getNext();
       while (aux != cabeza){
           msj += "\n" + aux;
           aux = aux.getNext();
@@ -62,14 +62,14 @@ public class ListaProducto {
    
    public boolean existe(String nombre) { // Metodo de existe con bo
         boolean resultado = false;
-        Nodo aux = cabeza;
+        NodoProducto aux = cabeza;
         if (aux != null) {
-            if (nombre == aux.getDato().getNombre()) {
+            if (nombre == aux.getDato().getNombreProducto()) {
                 resultado = true;
             } else {
                 aux = aux.getNext();
                 while (aux != cabeza) {
-                    if (nombre == aux.getDato().getNombre()) {
+                    if (nombre == aux.getDato().getNombreProducto()) {
                         resultado = true;
                     }
                     aux = aux.getNext();
@@ -79,15 +79,15 @@ public class ListaProducto {
         return resultado;
     }
    
-   public void modifica(Serie s) {
-        Nodo aux = cabeza;
+   public void modifica(Producto s) {
+        NodoProducto aux = cabeza;
         if (aux != null) {
-            if (s.getNombre() == aux.getDato().getNombre()&&s.getEpisodios()==aux.getDato().getEpisodios()) {
+            if (s.getNombreProducto() == aux.getDato().getNombreProducto()) {
                 aux.setDato(s);
             } else {
                 aux = aux.getNext();
                 while (aux != cabeza) {
-                    if (s.getNombre() == aux.getDato().getNombre()&&s.getEpisodios()==aux.getDato().getEpisodios()) {
+                    if (s.getNombreProducto() == aux.getDato().getNombreProducto()) {
                         aux.setDato(s);
                     }
                     aux = aux.getNext();
@@ -97,10 +97,10 @@ public class ListaProducto {
     }
    
    public void elimina(String nombre) {
-        Nodo aux = cabeza;
+        NodoProducto aux = cabeza;
 
-        while (aux.getDato().getNombre()!=nombre) {
-            if (nombre == aux.getDato().getNombre()) {
+        while (aux.getDato().getNombreProducto()!=nombre) {
+            if (nombre == aux.getDato().getNombreProducto()) {
                 aux.setDato(null);
 
             }
@@ -111,7 +111,7 @@ public class ListaProducto {
    public String PrintReverse (){
        if  (cabeza != null){
       String msj = cabeza.getDato()+"";
-      Nodo aux = cabeza.getNext();
+      NodoProducto aux = cabeza.getNext();
       while (aux != cabeza){
           msj += "\n" + aux;
           aux = aux.getNext();
